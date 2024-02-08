@@ -1,3 +1,5 @@
+import {da} from "date-fns/locale";
+
 const API_URL = process.env.WORDPRESS_API_URL;
 
 async function fetchAPI(query = "", { variables }: Record<string, any> = {}) {
@@ -97,7 +99,6 @@ export async function getAllPostsForHome(preview) {
       },
     },
   );
-
   return data?.posts;
 }
 
@@ -208,5 +209,6 @@ export async function getPostAndMorePosts(slug, preview, previewData) {
   // If there are still 3 posts, remove the last one
   if (data.posts.edges.length > 2) data.posts.edges.pop();
 
+  console.log(data.post.tags)
   return data;
 }
