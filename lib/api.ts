@@ -212,7 +212,7 @@ export async function getPostAndMorePosts(slug, preview, previewData) {
     return data;
 }
 
-export async function getPostsByTag(tagName: string[], preview, previewData) {
+export async function getPostsByTag(tagName: string[], preview) {
     const data = await fetchAPI(
         `
     fragment AuthorFields on User {

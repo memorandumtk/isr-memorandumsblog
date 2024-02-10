@@ -6,7 +6,7 @@
 .content ul,
 .content ol,
 .content blockquote {
-  @apply my-6;
+  @apply my-2 mx-12;
 }
 
 .content a {
@@ -27,7 +27,7 @@
 }
 
 .content ol > li {
-  @apply text-slate-700;
+  @apply text-slate-700 text-2xl;
 }
 
 .content ul > li > ul,
@@ -37,7 +37,7 @@
 /* Override the text color for all nested li elements */
 .content ol li ul li,
 .content ol li ol li {
-  @apply text-gray-500 hover:text-gray-700;
+  @apply text-gray-500 text-xl hover:text-gray-700;
 }
 
 .content ul > li > ul {

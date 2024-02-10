@@ -14,7 +14,8 @@ export default function PostPreview({
   return (
     <div>
       <div className="mb-5">
-        {coverImage && (
+        {/*{coverImage && (*/}
+            {coverImage && coverImage.node.sourceUrl && (
           <CoverImage title={title} coverImage={coverImage} slug={slug} />
         )}
       </div>

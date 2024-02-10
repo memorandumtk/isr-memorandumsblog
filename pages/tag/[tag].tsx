@@ -12,12 +12,19 @@ import Layout from "../../components/layout";
 import PostTitle from "../../components/post-title";
 import Tags from "../../components/tags";
 import {getPostsByTag, getAllPostsWithTag} from "../../lib/api";
-import {getAllPostsWithSlug, getPostAndMorePosts} from "../../lib/api";
 import {CMS_NAME} from "../../lib/constants";
 import Intro from "../../components/intro";
 import HeroPost from "../../components/hero-post";
 
-export default function Index({posts: {edges}, preview}) {
+export default function Index({postsByTag, preview}) {
+    const router = useRouter();
+    // If the page is not yet generated, this will be shown
+    // initially until getStaticProps() finishes running
+    if (router.isFallback && !postsByTag) {
+        return <ErrorPage statusCode={404}/>;
+    }
+
+    const {edges} = postsByTag;
     const heroPost = edges[0]?.node;
     const morePosts = edges.slice(1);
 
@@ -47,16 +54,19 @@ export default function Index({posts: {edges}, preview}) {
 export const getStaticProps: GetStaticProps = async ({
                                                          params,
                                                          preview = false,
-                                                         previewData,
                                                      }) => {
-    console.log('tag.tsx 52')
-    console.log(params)
-    // Check if params.tag is an array and treat it accordingly, otherwise wrap it in an array
+
+    // Check if params.tag is a string type and treat it accordingly, otherwise take the first element of the array.
     const tagName: string[] = params?.tag ? (Array.isArray(params.tag) ? params.tag : [params.tag]) : [];
-    const postsByTag = await getPostsByTag(tagName, preview, previewData);
+    const postsByTag = await getPostsByTag(tagName, preview);
+
+    // Check if postsByTag is false, then return notfound page made by Next.js: true to trigger a 404 page
+    if (!postsByTag) {
+        return {notFound: true};
+    }
 
     return {
-        props: {posts: postsByTag, preview},
+        props: {postsByTag, preview},
         revalidate: 10,
     };
 };
