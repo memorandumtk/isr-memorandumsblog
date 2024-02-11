@@ -20,10 +20,7 @@ export default function Index({postsByTag, preview}) {
     const router = useRouter();
     // If the page is not yet generated, this will be shown
     // initially until getStaticProps() finishes running
-    // if (router.isFallback || !postsByTag || postsByTag.edges.length === 0) {
-    //     return <ErrorPage statusCode={404}/>;
-    // }
-    if (router.isFallback) {
+    if (router.isFallback || !postsByTag || postsByTag.edges.length === 0) {
         return <ErrorPage statusCode={404}/>;
     }
 
@@ -60,6 +57,7 @@ export const getStaticProps: GetStaticProps = async ({
                                                      }) => {
 
     // Check if params.tag is a string type and treat it accordingly, otherwise take the first element of the array.
+    // const tagName = params?.tag ? (Array.isArray(params.tag) ? params.tag[0] : params.tag) : null;
     const tagName: string[] = params?.tag ? (Array.isArray(params.tag) ? params.tag : [params.tag]) : null;
     if (!tagName) {
         return { notFound: true };
