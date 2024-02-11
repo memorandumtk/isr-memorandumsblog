@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function Tags({tags}) {
     return (
         <div className="max-w-2xl mx-auto">
-            <p className="pt-12 text-lg font-bold">
+            <p className="pt-16 text-lg text-center font-bold">
                 Tagged
                 {tags.edges.map((tag, index) => (
                     <Link href={`/tag/${tag.node.name}`} key={index}>
