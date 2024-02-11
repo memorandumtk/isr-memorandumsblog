@@ -31,11 +31,10 @@ export default function HeroPost({
                         <Date dateString={date}/>
                     </div>
                 </div>
-                <div>
-                    <p
+                <div
                         className="text-lg leading-relaxed mb-4"
                         dangerouslySetInnerHTML={{__html: excerpt}}
-                    />
+                    >
                 </div>
             </div>
         </section>
