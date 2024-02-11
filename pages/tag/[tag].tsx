@@ -20,7 +20,7 @@ export default function Index({postsByTag, preview}) {
     const router = useRouter();
     // If the page is not yet generated, this will be shown
     // initially until getStaticProps() finishes running
-    if (router.isFallback && !postsByTag) {
+    if (router.isFallback || !postsByTag || postsByTag.edges.length === 0) {
         return <ErrorPage statusCode={404}/>;
     }
 
