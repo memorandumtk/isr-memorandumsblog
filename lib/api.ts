@@ -274,7 +274,7 @@ export async function getPostsByTag(tagName: string[], preview) {
     return data?.posts;
 }
 
-export async function getAllPostsWithTag() {
+export async function getAllTags() {
     const data = await fetchAPI(`
     {
   tags(first: 10000) {

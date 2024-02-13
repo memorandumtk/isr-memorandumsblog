@@ -11,7 +11,7 @@ import SectionSeparator from "../../components/section-separator";
 import Layout from "../../components/layout";
 import PostTitle from "../../components/post-title";
 import Tags from "../../components/tags";
-import {getPostsByTag, getAllPostsWithTag} from "../../lib/api";
+import {getPostsByTag, getAllTags} from "../../lib/api";
 import {CMS_NAME} from "../../lib/constants";
 import Intro from "../../components/intro";
 import HeroPost from "../../components/hero-post";
@@ -77,7 +77,7 @@ export const getStaticProps: GetStaticProps = async ({
 
 
 export const getStaticPaths: GetStaticPaths = async () => {
-    const allTags = await getAllPostsWithTag();
+    const allTags = await getAllTags();
 
     return {
         paths: allTags.edges.map(({node}) => `/tag/${node.name}`) || [],
